@@ -18,8 +18,8 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const db = mongo.getDb();
     const user = await db.collection("users").findOne({ username, password });
-    const token = jwt.sign({ username: user.username }, JWT_PW);
-    res.status(200).json({token});
+    const token = jwt.sign({ username: user.username, _id: user._id}, JWT_PW);
+    res.status(200).json({ token });
   } catch (err) {
     res.status(200).json({ msg: "Failed to authenticate" });
   }
@@ -37,9 +37,9 @@ app.get("/auth", (req, res) => {
 });
 
 app.listen(PORT !== undefined ? PORT : 3300, () => {
-    console.warn(
-      "App is running at http://localhost:" + (PORT !== undefined ? PORT : 3300)
-    );
-  });
+  console.warn(
+    "App is running at http://localhost:" + (PORT !== undefined ? PORT : 3300)
+  );
+});
 
 module.exports = app;
