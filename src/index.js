@@ -41,7 +41,6 @@ app.get("/transactions/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const db = mongo.getDb();
-    // console.log(id, ObjectId(id));
     const transactons = await db
       .collection("transactions")
       .aggregate([
