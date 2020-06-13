@@ -18,8 +18,8 @@ const collections = seeder.readCollectionsFromPath(
 (async () => {
   try {
     await seeder.import(collections);
-    console.log("Success");
+    console.log("Data successfully inserted in MongoDB");
   } catch (err) {
-    console.log("Error");
+    console.log("Error entering data. Please run again the application.");
   }
 })()
