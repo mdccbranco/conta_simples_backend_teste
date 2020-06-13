@@ -19,6 +19,12 @@ const accounts = [
     accountNumber: 123,
     _id: getObjectId("account3"),
   },
+  {
+    owner: getObjectId("user3"),
+    bank: getObjectId("bank1"),
+    accountNumber: 123,
+    _id: getObjectId("account4"),
+  },
 ];
 
 module.exports = accounts;
