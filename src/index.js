@@ -37,9 +37,23 @@ app.get("/auth", (req, res) => {
   }
 });
 
+//* Middleware to insert user data in request
+app.use((req, res, next) => {
+  let token = req.header("Authorization");
+  if (token) {
+    token = token.split(" ")[1];
+    req.user = jwt.verify(token, JWT_PW);
+    next();
+  } else {
+    res.status(500).json({ msg: "User not authenticated" });
+    return;
+  }
+});
+
 app.get("/transactions/:id", async (req, res) => {
+  const { id } = req.params;
+  if(req.user._id === id){
   try {
-    const { id } = req.params;
     const db = mongo.getDb();
     const transactons = await db
       .collection("transactions")
@@ -127,8 +141,11 @@ app.get("/transactions/:id", async (req, res) => {
 
     res.status(200).json(transactons);
   } catch (err) {
-    res.status(500).json({ msg: "Failed to authenticate" });
+  res.status(500).json({ msg: "Failed to get data" });
   }
+} else {
+  res.status(500).json({ msg: "Unauthorized user" });
+}
 });
 
 app.listen(PORT !== undefined ? PORT : 3300, () => {
