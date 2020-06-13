@@ -13,6 +13,12 @@ const users = [
     cnpj: "04.464.640/0001-03",
     _id: getObjectId("user2"),
   },
+  {
+    username: "user3",
+    password: "conta3",
+    cnpj: "40.595.984/0001-15",
+    _id: getObjectId("user3"),
+  },
 ];
 
 module.exports = users;
