@@ -36,6 +36,13 @@ const transactions = [
     value: 230,
     date: new Date("2010-05-28T09:24:33"),
   },
+  {
+    payer: getObjectId("account4"),
+    beneficiary: getObjectId("account2"),
+    type: "transfer",
+    value: 20,
+    date: new Date("2010-05-20T20:34:45"),
+  },
 ];
 
 module.exports = transactions;
